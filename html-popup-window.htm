@@ -241,19 +241,18 @@
 <link rel=stylesheet href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
 
 <script>
-	/* http://hompylove.com/system/bbs/board.php?bo_table=tip&wr_id=14, https://webisfree.com/2015-02-04/[자바스크립트]-쿠키(cookie)-저장-및-삭제-예제보기 참고함 */
 	function saveSetting(name, val) {
-		var d = new Date(); d.setDate(d.getDate()+365);
+		var d = new Date; 
+		d.setDate(d.getDate() + 180);
 		document.cookie = escape(name) + '=' + escape(val) + ';';
 	}
 
-	function getSetting(name) {
+	function getSetting(name, def) {
 		var ret;
-
-		if(!document.cookie) return null;
+		if(!document.cookie) return def;
 
 		const c = document.cookie.split(escape(name) + '=');
-		if(!(c.length >= 2)) return null;
+		if(c.length < 2) return def;
 
 		return unescape(c[1].split(';')[0]);
 	}
@@ -291,44 +290,8 @@
 
 		var px, py, ox, oy;
 
-		/* https://www.w3schools.com/howto/howto_js_draggable.asp 참고함 */
 		function setDraggable() {
-			$('div.window').each(function() {
-				const el = $(this)[0];
-				$(el).children('.titlebar')[0].onmousedown = (function(e) {
-					if(!e) e = window.event;
-					e.preventDefault();
-
-					document.onmouseup = (function() {
-						document.onmouseup = null;
-						document.onmousemove = null;
-					});
-
-					ox = e.clientX, oy = e.clientY;
-
-					document.onmousemove = (function(e) {
-						if(!e) e = window.event;
-						e.preventDefault();
-
-						px = ox - e.clientX, py = oy - e.clientY;
-						ox = e.clientX, oy = e.clientY;
-
-						el.style.top  = el.offsetTop  - py + 'px';
-						el.style.left = el.offsetLeft - px + 'px';
-					});
-				});
-
-				$(el).children('.titlebar').on('mousedown', function(e) {
-					$(this).parent().appendTo($(this).parent().parent());
-				});
-
-				if($(el).attr('id') != 'toolsWindow') {
-					$(el).resizable({
-						minWidth:  '160px',
-						minHeight: '60px'
-					});
-				}
-			});
+			$('div.window').draggable({ handle: '.titlebar' });
 
 			$('div.window .close-btn').click(function() {
 				win = $(this);
