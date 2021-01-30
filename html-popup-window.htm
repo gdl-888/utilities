@@ -1,3 +1,9 @@
+<style>
+	#windowManager:only-child {
+		display: none;
+	}
+</style>
+
 <style id=flatStyle class=scheme-stylesheet>
 	.pull-right {
        float: right;
@@ -112,7 +118,7 @@
 	}
 	
 	div.window:last-child .titlebar .title {
-		background: #6294cc;
+		background: #50b3e9;
 	}
 
 	div.window .titlebar .title::before {
@@ -336,7 +342,7 @@
 				if(getSetting('noAnimations') == '1') 
 					closeAction();
 				else 
-					win.parent().children('.window-content').slideToggle('fast', closeAction);
+					win.parent().slideToggle('fast', closeAction);
 			});
 		
 			$('.window#windowManager .window-content li').click(function() {
@@ -390,8 +396,8 @@
 					'</div>' +
 					
 					'<div>' +
-						'<h2>테마</h2>' +
-						'<label>색 구성표 [*]:</label><br>' +
+						'<h2>모양</h2>' +
+						'<label>스킨 [*]:</label><br>' +
 						'<select class=form-control id=schemeSelect onchange="saveSetting(\'scheme\', this.value);">' +
 							'<option value=glossy ' + (getSetting('scheme') == 'glossy' ? 'selected' : '') + '>푸른하늘 </option>' +
 							'<option value=bluemetal ' + (getSetting('scheme') == 'bluemetal' ? 'selected' : '') + '>금속</option>' +
@@ -424,14 +430,6 @@
 	<div class=window id=windowManager style="width: 200px; height: 270px; left: 10px; top: 50px;">
 		<div class=titlebar><div class=title>창 전환기</div></div>
 		<div class=window-content>
-			<li data-winid=mainWindow>창 제목</li>
-		</div>
-	</div>
-
-	<div class=window id=mainWindow style="width: 200px; height: 270px; left: 10px; top: 50px;">
-		<div class=titlebar><div class=title>창 제목</div></div>
-		<div class=window-content>
-			창 내용
 		</div>
 	</div>
 </grp>
