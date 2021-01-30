@@ -293,6 +293,15 @@
 		function setDraggable() {
 			$('div.window').draggable({ handle: '.titlebar' });
 
+			$('div.window').children('.titlebar').on('mousedown', function(e) {
+				$(this).parent().appendTo($(this).parent().parent());
+			});
+
+			$('div.window:not(#toolsWindow)').resizable({
+				minWidth:  '160px',
+				minHeight: '60px'
+			});
+
 			$('div.window .close-btn').click(function() {
 				win = $(this);
 			
