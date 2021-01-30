@@ -1,0 +1,437 @@
+<style id=flatStyle class=scheme-stylesheet>
+	.pull-right {
+       float: right;
+	}
+	
+	div.window {
+		z-index: 9;
+		position: absolute;
+		min-width: 200px;
+	}
+
+	div.window .titlebar {
+		text-align: center;
+		
+		cursor: move;
+		
+		padding: 4px 30px 4px 30px;
+		border: 2px solid gray;
+		background: #fff;
+		 position: relative;
+		
+		border-width: 4px 4px 0px 4px;
+		
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	
+	div.window:last-child .titlebar {
+		background: gray;
+		
+		font-weight: bold;
+		
+		color: white;
+	}
+	
+	div.window .window-content {
+		padding: 12px;
+		border: 2px solid gray;
+		border-top: none;
+		background: #fff;
+		height: calc(100% - 55px);
+		overflow: auto;
+		border-width: 0px 4px 4px 4px;
+	}
+	
+	div.window:last-child .window-content {
+		border-color: gray;
+	}
+	
+	div.window:last-child .titlebar {
+		border-color: gray;
+	}
+	
+	div.window .close-btn, div.wiki-window .fold-btn {
+		margin: -27px 0 0 6px;
+		position: absolute;
+		cursor: pointer;
+		width: 24px;
+	}
+	
+	div.window .fold-btn {
+		margin: -27px 0 0 29px;
+	}
+</style>
+
+<style id=bluemetalStyle class=scheme-stylesheet>
+	.pull-right {
+		float: right;
+	}
+
+	div.window {
+		z-index: 9;
+		position: absolute;
+		min-width: 200px;
+		border: 1.2px solid black;
+		border-radius: 10px 10px 0 0;
+		background: rgb(240, 240, 240);
+	}
+
+	div.window .titlebar {
+		text-align: center;
+		
+		cursor: move;
+		
+		border-radius: 10px 10px 0 0;
+		padding: 3px 30px 3px 30px;
+		background-image: linear-gradient(to bottom, rgb(135, 135, 135) 0%, rgb(250, 250, 250) 51%, rgb(197, 197, 197) 50%, rgb(240, 240, 240) 100%);
+		position: relative;
+		
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		color: white;
+	}
+
+	div.window:last-child .titlebar {
+		background-image: linear-gradient(to bottom, rgb(121, 137, 150) 0%, rgb(221, 230, 239) 51%, rgb(157, 173, 189) 50%, rgb(240, 240, 240) 100%);
+		
+		font-weight: bold;
+		text-shadow: 1px 1px 0px black;
+		
+		color: white;
+	}
+
+	div.window .titlebar .title {
+		border-radius: 55px;
+		box-shadow: 3px 3px 3px gray inset;
+		padding: 3px;
+		background: gray;
+		border: 2px inset gray;
+	}
+	
+	div.window:last-child .titlebar .title {
+		background: #6294cc;
+	}
+
+	div.window .titlebar .title::before {
+		border-radius: 20px 20px 15px 10px;
+		height: 9px;
+		content: "";
+		background-image: linear-gradient(to bottom, rgba(255, 255, 255, 8), rgba(255, 255, 255, .4));
+		position: absolute;
+		width: calc(100% - 70px);
+		margin: -4px 0 0 0;
+		left: 35px;
+		top: 10px;
+	}
+
+	div.window .window-content {
+		padding: 12px;
+		border: 2px solid black;
+		background: rgb(242, 241, 246);
+		height: calc(100% - 63px);
+		overflow: auto;
+		margin: 0 3px 3px 3px;
+		border-width: 1px;
+		border-radius: 0 0 1px 1px;
+	}
+
+	div.window .close-btn, div.window .fold-btn {
+		margin: -27px 0 0 6px;
+		position: absolute;
+		cursor: pointer;
+		width: 24px;
+	}
+
+	div.window .fold-btn {
+		margin: -27px 0 0 29px;
+	}
+</style>
+
+<style id=glossyStyle class=scheme-stylesheet>
+	.pull-right {
+		float: right;
+	}
+
+	div.window {
+		z-index: 9;
+		position: absolute;
+		min-width: 200px;
+	}
+
+	div.window .titlebar {
+		text-align: center;
+		
+		cursor: move;
+		
+		border-radius: 10px 10px 0 0;
+		padding: 4px 30px 4px 30px;
+		border: 2px solid rgb(180, 199, 216);
+		background-image: linear-gradient(to bottom, rgb(140, 187, 234), rgb(209, 232, 255), aliceblue);
+		position: relative;
+		
+		border-width: 4px 4px 0px 4px;
+		
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	div.window:last-child .titlebar {
+		background-image: linear-gradient(to bottom, rgb(100, 169, 238), rgb(133, 192, 251), aliceblue);
+		
+		font-weight: bold;
+		text-shadow: 1px 1px 0px black;
+		
+		color: white;
+	}
+
+	div.window .titlebar::before {
+		border-radius: 20px 20px 15px 10px;
+		height: 10px;
+		content: "";
+		background-image: linear-gradient(to bottom, rgba(255, 255, 255, 8), rgba(255, 255, 255, .4));
+		position: absolute;
+		width: calc(100% - 3.5px);
+		margin: -4px 0 0 0;
+		left: 1px;
+	}
+
+	div.window .window-content {
+		padding: 12px;
+		border: 2px solid rgb(180, 199, 216);
+		border-top: none;
+		background: linear-gradient(aliceblue, #f7fcff);
+		height: calc(100% - 55px);
+		overflow: auto;
+		border-width: 0px 4px 4px 4px;
+	}
+
+	div.window:last-child .window-content {
+		border-color: rgb(123, 158, 188);
+	}
+
+	div.window:last-child .titlebar {
+		border-color: rgb(123, 158, 188);
+	}
+
+	div.window .close-btn, div.window .fold-btn {
+		margin: -27px 0 0 6px;
+		position: absolute;
+		cursor: pointer;
+		width: 24px;
+	}
+
+	div.window .fold-btn {
+		margin: -27px 0 0 29px;
+	}
+</style>
+
+<meta charset=utf8 />
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+<link rel=stylesheet href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
+
+<script>
+	/* http://hompylove.com/system/bbs/board.php?bo_table=tip&wr_id=14, https://webisfree.com/2015-02-04/[자바스크립트]-쿠키(cookie)-저장-및-삭제-예제보기 참고함 */
+	function saveSetting(name, val) {
+		var d = new Date(); d.setDate(d.getDate()+365);
+		document.cookie = escape(name) + '=' + escape(val) + ';';
+	}
+
+	function getSetting(name) {
+		var ret;
+
+		if(!document.cookie) return null;
+
+		const c = document.cookie.split(escape(name) + '=');
+		if(!(c.length >= 2)) return null;
+
+		return unescape(c[1].split(';')[0]);
+	}
+	
+	(function setTheme() {
+		if(!getSetting('scheme')) return;
+	
+		for(el of document.querySelectorAll('.scheme-stylesheet')) {
+			if(!el.getAttribute('id').startsWith(getSetting('scheme'))) el.remove();
+		}
+	})();
+
+	/* window.saveSetting = saveSetting, window.getSetting = getSetting; */
+	
+	$(function () {
+		var windowCount = 0;
+	
+		if($(window).width() >= 1080) $("grp.for-mobile").remove();
+
+		const html = {
+			escape: function(content) {
+				content = content.replace(/["]/gi, '&quot;');
+				content = content.replace(/[&]/gi, '&amp;');
+				content = content.replace(/[<]/gi, '&lt;');
+				content = content.replace(/[>]/gi, '&gt;');
+	
+				return content;
+			}
+		};
+
+		window.memoCount = 0;
+
+		const getid = function(id) { return document.getElementById(id) }
+		const qall = function(q) { return document.querySelectorAll(q) }
+
+		var px, py, ox, oy;
+
+		/* https://www.w3schools.com/howto/howto_js_draggable.asp 참고함 */
+		function setDraggable() {
+			$('div.window').each(function() {
+				const el = $(this)[0];
+				$(el).children('.titlebar')[0].onmousedown = (function(e) {
+					if(!e) e = window.event;
+					e.preventDefault();
+
+					document.onmouseup = (function() {
+						document.onmouseup = null;
+						document.onmousemove = null;
+					});
+
+					ox = e.clientX, oy = e.clientY;
+
+					document.onmousemove = (function(e) {
+						if(!e) e = window.event;
+						e.preventDefault();
+
+						px = ox - e.clientX, py = oy - e.clientY;
+						ox = e.clientX, oy = e.clientY;
+
+						el.style.top  = el.offsetTop  - py + 'px';
+						el.style.left = el.offsetLeft - px + 'px';
+					});
+				});
+
+				$(el).children('.titlebar').on('mousedown', function(e) {
+					$(this).parent().appendTo($(this).parent().parent());
+				});
+
+				if($(el).attr('id') != 'toolsWindow') {
+					$(el).resizable({
+						minWidth:  '160px',
+						minHeight: '60px'
+					});
+				}
+			});
+
+			$('div.window .close-btn').click(function() {
+				win = $(this);
+			
+				function closeAction() {
+					$('.window#windowManager .window-content').children('li[data-winid="' + win.parent().attr('id') + '"]').remove();
+					win.parent().remove();
+					$('a[data-setaswindow="1"]').removeAttr('data-setaswindow');
+				}
+				
+				if(getSetting('noAnimations') == '1') 
+					closeAction();
+				else 
+					win.parent().children('.window-content').slideToggle('fast', closeAction);
+			});
+		
+			$('.window#windowManager .window-content li').click(function() {
+				const win = $('.window#' + $(this).attr('data-winid'));
+				win.appendTo(win.parent());
+			});
+		
+			$('.window#windowManager .window-content li a.close-link').click(function() {
+				$('.window#' + $(this).parent().attr('data-winid')).children('a.close-btn').click();
+			});
+		}
+
+		$('div.window .fold-btn').click(function() {
+			$(this).next().slideToggle('fast');
+		});
+
+		setDraggable();
+
+		function createWindow(title, content, width, height, top, left, closeable) {
+			if(typeof(closeable) == 'undefined') closeable = 1;
+			const newWindow = $('<div class=window id="' + String(++windowCount) + '">' +
+					'<div class=titlebar><div class=title>' + html.escape(title) + '</div></div>' +
+					'<a ' + (!closeable ? 'style="display: none;"' : '') + ' title="닫기" class=close-btn>' + "<img src='data:image/png;base64,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' />" + '</a>' +
+					'<div class=window-content style="' + (getSetting('noAnimations') == '1' ? '' : 'display: none;') + '">' + content + '</div>' +
+			  '</div>');
+			newWindow.css({
+				'width': width ? width : '480px',
+				'height': height ? height : '360px',
+				'top': top ? top : Number($('.window:last-child').css('top').replace(/px$/, '')) + 30 + 'px',
+				'left': left ? left : Number($('.window:last-child').css('left').replace(/px$/, '')) + 30 + 'px'
+			}).appendTo('grp.for-pc#windows');
+			
+			$('<li data-winid="' + String(windowCount) + '">' + html.escape(title) + (closeable ? ' <a class=close-link>×</a>' : '') + '</li>').appendTo($(".window#windowManager .window-content"));
+
+			setDraggable();
+			
+			if(getSetting('noAnimations') != '1') newWindow.children('.window-content').slideToggle('fast');
+
+			return newWindow;
+		}
+
+		window.createWindow = createWindow;
+
+		$('a#skinSettingsLink').click(function() {
+			const settingsWindow = createWindow('설정', 
+				'<div class=form-group>' +
+					'<div>' +
+						'<h2>창</h2>' + 
+						'<label><input type=checkbox id=winManagerOnTop onclick="if($(this).is(\':checked\')) saveSetting(\'winManagerOnTop\', \'1\'); else saveSetting(\'winManagerOnTop\', \'0\'); setSettings();"> 창 전환기를 항상 위에 표시</label><br>' + 
+						'<label><input type=checkbox id=noAnimations onclick="if($(this).is(\':checked\')) saveSetting(\'noAnimations\', \'1\'); else saveSetting(\'noAnimations\', \'0\'); setSettings();"> 애니메이션 끄기</label><br>' + 
+					'</div>' +
+					
+					'<div>' +
+						'<h2>테마</h2>' +
+						'<label>색 구성표 [*]:</label><br>' +
+						'<select class=form-control id=schemeSelect onchange="saveSetting(\'scheme\', this.value);">' +
+							'<option value=glossy ' + (getSetting('scheme') == 'glossy' ? 'selected' : '') + '>푸른하늘 </option>' +
+							'<option value=bluemetal ' + (getSetting('scheme') == 'bluemetal' ? 'selected' : '') + '>금속</option>' +
+							'<option value=flat ' + (getSetting('scheme') == 'flat' ? 'selected' : '') + '>심플</option>' +
+						'</select>' +
+					'</div>' +
+					 
+					'<p>[*] 새로고침해야 적용됩니다.</p>' +
+				'</div>', '420px', '350px');
+
+			if(getSetting('noLinkAsWindow') == '1') $("#noLinkAsWindow").attr('checked', '');
+			if(getSetting('winManagerOnTop') == '1') $("#winManagerOnTop").attr('checked', '');
+			if(getSetting('noAnimations') == '1') $("#noAnimations").attr('checked', '');
+		});
+
+		function setSettings() {
+			if(getSetting('winManagerOnTop') == '1') $("#windowManager").css('z-index', '11');
+			else $("#windowManager").css('z-index', '9');
+		}
+
+		setSettings();
+
+		window.setSettings = setSettings;
+	});
+</script>
+
+<a id=skinSettingsLink>[설정]</a>
+
+<grp id=windows class=for-pc>
+	<div class=window id=windowManager style="width: 200px; height: 270px; left: 10px; top: 50px;">
+		<div class=titlebar><div class=title>창 전환기</div></div>
+		<div class=window-content>
+			<li data-winid=mainWindow>창 제목</li>
+		</div>
+	</div>
+
+	<div class=window id=mainWindow style="width: 200px; height: 270px; left: 10px; top: 50px;">
+		<div class=titlebar><div class=title>창 제목</div></div>
+		<div class=window-content>
+			창 내용
+		</div>
+	</div>
+</grp>
