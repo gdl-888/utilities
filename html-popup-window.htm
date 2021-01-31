@@ -249,19 +249,23 @@
 
 	function getSetting(name, def) {
 		var ret;
-		if(!document.cookie) return def;
+		if(!document.cookie) {
+			saveSetting(name, def);
+			return def;
+		}
 
 		const c = document.cookie.split(escape(name) + '=');
-		if(c.length < 2) return def;
+		if(c.length < 2) {
+			saveSetting(name, def);
+			return def;
+		}
 
 		return unescape(c[1].split(';')[0]);
 	}
 	
 	(function setTheme() {
-		if(!getSetting('scheme')) return;
-	
 		for(el of document.querySelectorAll('.scheme-stylesheet')) {
-			if(!el.getAttribute('id').startsWith(getSetting('scheme'))) el.remove();
+			if(!el.getAttribute('id').startsWith(getSetting('scheme', 'glossy'))) el.remove();
 		}
 	})();
 
